@@ -4,11 +4,11 @@ import animals.Animal;
 import food.EFoodType;
 import food.IEdible;
 
-public class Carnivore implements IDiet{
+public class Herbivore implements IDiet{
 	
 	public boolean canEat(EFoodType food)
 	{
-		if(food.equals(EFoodType.MEAT))
+		if(food.equals(EFoodType.VEGETABLE))
 		{
 			return true;
 		}
@@ -20,9 +20,9 @@ public class Carnivore implements IDiet{
 		
 		if(canEat(food.getFoodType() == true))
 		{
-			double weightCarniv = animal.getWeight() + animal.getWeight() * 0.1;
+			double weightCarniv = animal.getWeight() + animal.getWeight() * 0.07;
 			return weightCarniv;
 		}
-	}
+	}}
 
-}
+

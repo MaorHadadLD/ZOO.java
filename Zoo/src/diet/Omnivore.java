@@ -6,6 +6,7 @@ import food.IEdible;
 
 public class Omnivore {
 	
+
 	public boolean canEat(EFoodType food)
 	{
 		if(!(food.equals(EFoodType.NOTFOOD)))
@@ -17,7 +18,7 @@ public class Omnivore {
 	
 	public double eat(Animal animal, IEdible food)
 	{
-		double weight = this.weight;
+		double weight = this.getWeight();
 		Carnivore c = new Carnivore();
 		Herbivore h = new Herbivore();
 		if(food.equals(EFoodType.MEAT))
