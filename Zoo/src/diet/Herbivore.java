@@ -18,11 +18,12 @@ public class Herbivore implements IDiet{
 	public double eat(Animal animal, IEdible food)
 	{
 		
-		if(canEat(food.getFoodType() == true))
+		if(canEat(food.getFoodtype()))
 		{
 			double weightCarniv = animal.getWeight() + animal.getWeight() * 0.07;
 			return weightCarniv;
 		}
+		return animal.getWeight();
 	}}
 
 

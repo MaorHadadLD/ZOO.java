@@ -1,30 +1,45 @@
 package mobility;
 
 public class Point {
-	private int x;
-	private int y;
 	
-	public boolean setX(int x)
+	private int x,y;
+	private static final int maxX=800,maxY=600;
+	
+	public Point()
 	{
-		
-		if(0 < x && x < 800)
-		{
-			this.x = x;
-			return true;
-		}
-		return false;
-		
+		this.x=0;
+		this.y=0;
 	}
 	
-	public boolean serY(int y)
+	public Point(int x,int y)
 	{
-		
-		if(0 < y && y < 600)
+		this.x=x;
+		this.y=y;
+	}
+	
+	public Point(Point p1)
+	{
+		this.x=p1.getx();
+		this.y=p1.gety();
+	}
+	
+	public int getx()
+	{
+		return this.x;
+	}
+	
+	public int gety()
+	{
+		return this.y;
+	}
+	
+	public boolean checkBoundaries(Point p)
+	{
+		if(p.getx()<0||p.getx()>maxX||p.gety()<0||p.gety()>maxY)
 		{
-			this.y = y;
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 }

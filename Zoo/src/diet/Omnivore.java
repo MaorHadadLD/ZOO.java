@@ -1,10 +1,8 @@
 package diet;
-
+import food.*;
 import animals.Animal;
-import food.EFoodType;
-import food.IEdible;
 
-public class Omnivore {
+public class Omnivore implements IDiet{
 	
 
 	public boolean canEat(EFoodType food)
@@ -18,18 +16,23 @@ public class Omnivore {
 	
 	public double eat(Animal animal, IEdible food)
 	{
-		double weight = this.getWeight();
+		double oldWeight = animal.getWeight();
 		Carnivore c = new Carnivore();
 		Herbivore h = new Herbivore();
-		if(food.equals(EFoodType.MEAT))
+		if(canEat(food.getFoodtype()))
 		{
-			c.eat(animal, food);
+		 if(food.equals(EFoodType.MEAT))
+		 {
+			double newWeight1 = c.eat(animal, food);
+			return newWeight1;
+		 }
+		 else
+		 {
+			double newWeight2 = h.eat(animal, food);
+			return newWeight2;
+		 }
 		}
-		else
-		{
-			h.eat(animal, food);
-		}
-		
+		return oldWeight;
 	}
 
 }
