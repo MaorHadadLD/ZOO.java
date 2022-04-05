@@ -19,7 +19,6 @@ public class Turtle extends Chew{
 		super.setDiet(turtleDite);
 		setAge(1);
 		MessageUtility.logConstractor("Turtle", name);
-		
 	}
 	
 	public Turtle(String name, Point point1)
@@ -51,7 +50,7 @@ public class Turtle extends Chew{
 		return this.age;
 	}
 	
-	public EFoodType getFoodType()
+	public EFoodType getFoodtype()
 	{
 		return EFoodType.MEAT;
 	}
@@ -59,7 +58,7 @@ public class Turtle extends Chew{
 	public boolean eat(IEdible food)
 	{
 		double turtleWeight = super.getDiet().eat(this, food);
-		if(turtleWeight > super.getWeight())
+		if(turtleWeight > 0.0)
 		{
 			super.makeSound();
 			super.setWeight(turtleWeight);
@@ -75,7 +74,7 @@ public class Turtle extends Chew{
 	
 	public String toString()
 	{
-		return this.getName();
+		return "[Turtle]:" + this.getName();
 	}
 
 }

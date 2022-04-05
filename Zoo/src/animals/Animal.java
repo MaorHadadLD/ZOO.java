@@ -32,7 +32,7 @@ public abstract class Animal extends Mobile implements IEdible {
 	
 	public boolean setWeight(double weight1)
 	{
-		if(weight > 0.0)
+		if(weight1 > 0.0)
 		{
 			this.weight = weight1;
 			MessageUtility.logSetter(name, "setWeight()", weight1, true);
@@ -44,6 +44,7 @@ public abstract class Animal extends Mobile implements IEdible {
 	
 	public boolean setName(String name)
 	{
+		this.name = name;
 		MessageUtility.logSetter(name, "setNmae()", name, true);
 		return true;
 	}
@@ -51,7 +52,7 @@ public abstract class Animal extends Mobile implements IEdible {
 	public boolean setDiet(IDiet diet1)
 	{
 		this.diet = diet1;
-		MessageUtility.logSetter(name, "setDiet()", diet1, true);
+		MessageUtility.logSetter(name, "setDiet()", diet1.getClass().getSimpleName(), true);
 		return true;
 	}
 	
@@ -77,6 +78,6 @@ public abstract class Animal extends Mobile implements IEdible {
 	
 	public abstract boolean eat(IEdible food);
 	
-	public abstract String toStrint();
+	public abstract String toString();
 
 }

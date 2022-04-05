@@ -51,7 +51,7 @@ public class Giraffe extends Chew{
 		return this.neckLength;
 	}
 	
-	public EFoodType getFoodType()
+	public EFoodType getFoodtype()
 	{
 		return EFoodType.MEAT;		
 	}
@@ -59,7 +59,7 @@ public class Giraffe extends Chew{
 	public boolean eat(IEdible food)
 	{
 		double giraffeWeight = super.getDiet().eat(this, food);
-		if(giraffeWeight > super.getWeight())
+		if(giraffeWeight > 0.0)
 		{
 			super.makeSound();
 			super.setWeight(giraffeWeight);
@@ -75,7 +75,7 @@ public class Giraffe extends Chew{
 	
 	public String toString()
 	{
-		return this.getName();
+		return "[Giraffe]:" + this.getName();
 	}
 
 }

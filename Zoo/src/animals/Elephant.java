@@ -52,7 +52,7 @@ public class Elephant extends Chew{
 		return this.trunkLength;
 	}
 	
-	public EFoodType getFoodType()
+	public EFoodType getFoodtype()
 	{
 		return EFoodType.MEAT;
 	}
@@ -60,7 +60,7 @@ public class Elephant extends Chew{
 	public boolean eat(IEdible food)
 	{
 		double elephantWeight = super.getDiet().eat(this, food);
-		if(elephantWeight > super.getWeight())
+		if(elephantWeight > 0.0)
 		{
 			super.makeSound();
 			super.setWeight(elephantWeight);
@@ -76,7 +76,7 @@ public class Elephant extends Chew{
 	
 	public String toString()
 	{
-		return this.getName();
+		return "[Elephant]:" + this.getName();
 	}
 
 }

@@ -35,7 +35,7 @@ public class Lion extends Roar{
 		return this.getScars();
 	}
 	
-	public EFoodType getFoodType()
+	public EFoodType getFoodtype()
 	{
 		return EFoodType.NOTFOOD;
 	}
@@ -43,7 +43,7 @@ public class Lion extends Roar{
 	public boolean eat(IEdible food)
 	{
 		double newWeight = super.getDiet().eat(this, food);
-		if(newWeight > super.getWeight())
+		if(newWeight > 0.0)
 		{
 			Random scars = new Random();
 			this.scarCount = scars.nextInt(scarCount, scarCount + 1);
@@ -66,16 +66,14 @@ public class Lion extends Roar{
 		return false;
 	}
 	
-	public void Roar()
+	public void roar()
 	{
 		MessageUtility.logSound(super.getName(), "Roar, then stretches and shakes its mane");
 	}
 	
 	public String toString()
 	{
-		return this.getName();
+		return "[Lion]:" + this.getName();
 	}
-	
-	
 
 }

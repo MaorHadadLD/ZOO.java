@@ -50,15 +50,15 @@ public class Bear extends Roar{
 		return this.furcolor;
 	}
 	
-	public EFoodType gerFoodType()
+	public EFoodType getFoodtype()
 	{
 		return EFoodType.MEAT;
 	}
 	
-	public boolean eat(IEdite food)
+	public boolean eat(IEdible food)
 	{
 		double baerWeight = super.getDiet().eat(this, food);
-		if(baerWeight > super.getWeight())
+		if(baerWeight > 0.0)
 		{
 			super.makeSound();
 			super.setWeight(baerWeight);
@@ -74,7 +74,7 @@ public class Bear extends Roar{
 	
 	public String toString()
 	{
-		return this.getName();
+		return "[Bear]:" + this.getName();
 	}
 	
 
