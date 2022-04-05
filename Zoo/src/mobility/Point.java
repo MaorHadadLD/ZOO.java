@@ -41,5 +41,10 @@ public class Point {
 		}
 		return true;
 	}
+	
+	public String getPoint()
+	{
+		return this.x + ", " + this.y;
+	}
 
 }
