@@ -2,6 +2,8 @@ package zoo;
 import animals.*;
 import food.IEdible;
 import mobility.Point;
+import utilities.MessageUtility;
+
 import java.util.*;
 
 public class ZooActions {
@@ -19,7 +21,7 @@ public class ZooActions {
 		return false;
 	}
 	
-	public boolean move(Object animal, Point point)
+	public static boolean move(Object animal, Point point)
 	{
 		if(point.checkBoundaries(point))
 		{
@@ -360,8 +362,42 @@ public class ZooActions {
 				}
 			}
 		}
-		
+		for(int i = 0; i < sizeOfArray; i++)
+	    {
+			int x,y;
+	    	System.out.println("Enter the point where you want to move the animal: ");
+	    	x = sc.nextInt();
+	    	y = sc.nextInt();
+	    	Point newPosition = new Point(x,y);
+	    	
+	    	if(move(array[i],newPosition))
+	    	{
+	    		MessageUtility.logBooleanFunction(array[i].getName(), "move()", newPosition.getPoint(), true);
+	    	}
+	    	else
+	    	{
+	    		MessageUtility.logBooleanFunction(array[i].getName(), "move()", newPosition.getPoint(), false);
+	    	}
+	    }
+		for(int i = 0; i < sizeOfArray; i++)
+		{
+			Random check = new Random();
+			Random check1 = new Random();
+			int j = check.nextInt(sizeOfArray - 1), k = check1.nextInt(sizeOfArray - 1);
+			while(array[j] == array[k])
+			{
+				k = check1.nextInt(sizeOfArray - 1);
+			}
+			if(array[j].eat(array[k]))
+			{
+				MessageUtility.logBooleanFunction(array[j].getName(), "eat()", array[k].getName(), true);
+			}
+			else
+			{
+				MessageUtility.logBooleanFunction(array[j].getName(), "eat()", array[k].getName(), false);
+			}
+		}
 	}
-	
-
+    
 }
+
