@@ -4,6 +4,9 @@ import animals.Animal;
 
 public class Omnivore implements IDiet{
 	
+	private static  Carnivore c = new Carnivore();
+	private static Herbivore h = new Herbivore();
+	
 
 	public boolean canEat(EFoodType food)
 	{
@@ -11,17 +14,18 @@ public class Omnivore implements IDiet{
 		{
 			return true;
 		}
-		return false;
+		else
+		{
+			return false;
+		}
+		
 	} 
 	
 	public double eat(Animal animal, IEdible food)
 	{
-		double oldWeight = animal.getWeight();
-		Carnivore c = new Carnivore();
-		Herbivore h = new Herbivore();
-		if(canEat(food.getFoodtype()))
+		if(canEat(food.getFoodtype()) == true)
 		{
-		 if(food.equals(EFoodType.MEAT))
+		 if(food.getFoodtype() == EFoodType.MEAT)
 		 {
 			double newWeight1 = c.eat(animal, food);
 			return newWeight1;
@@ -32,7 +36,7 @@ public class Omnivore implements IDiet{
 			return newWeight2;
 		 }
 		}
-		return oldWeight;
+		return 0;
 	}
 
 }

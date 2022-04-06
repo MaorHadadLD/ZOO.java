@@ -20,11 +20,10 @@ public class Carnivore implements IDiet{
 		
 		if(canEat(food.getFoodtype()) == true)
 		{
-			double weightCarniv = animal.getWeight() * 0.1;
-			animal.setWeight(weightCarniv);
+			double weightCarniv = animal.getWeight() * 1.1;
 			return weightCarniv;
 		}
-		return animal.getWeight();
+		return 0;
 	}
 
 }
