@@ -12,7 +12,7 @@ import utilities.MessageUtility;
  * @author baroh
  *
  */
-public abstract class Plant implements IEdible, ILocatable {
+public abstract class Plant implements IEdible, ILocatable, IDrawable {
 	/**
 	 * 
 	 */

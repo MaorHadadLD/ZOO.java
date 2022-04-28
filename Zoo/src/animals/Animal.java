@@ -3,19 +3,46 @@ import food.*;
 import mobility.*;
 import diet.IDiet;
 import utilities.MessageUtility;
+import graphics.*;
 
-public abstract class Animal extends Mobile implements IEdible {
+public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior{
 	private String name;
 	private double weight;
 	private IDiet diet;
+	private final int EATÉDISTANCE = 5;
+	private int size;
+	private String col;
+	private int horSpeed;
+	private int verSpeed;
+	private boolean coordChanged;
+	private Thread thread;
+	private int x_dir;
+	private int y_dir;
+	private int eatCount;
+	private ZooPanel pan;
+	private BufferedImage img1, img2;
+	
 	
 	
 	public Animal(String name, Point location)
 	{
 		super(location);
 		setName(name);
+		this.coordChanged = false;
+		this.eatCount = 0;
 		MessageUtility.logConstractor("Animal", name);
 		
+	}
+	
+	public Animal(Point point, int size, String col, int horSpeed, int verSpeed)
+	{
+		super(point);
+		setName(" ");
+		this.coordChanged = false;
+		this.eatCount = 0;
+		this.col = col;
+		this.horSpeed = horSpeed;
+		this.verSpeed = verSpeed;
 	}
 	
 	public double getWeight()
@@ -79,5 +106,43 @@ public abstract class Animal extends Mobile implements IEdible {
 	public abstract boolean eat(IEdible food);
 	
 	public abstract String toString();
+	
+	public int getEatCount()
+	{
+		return this.eatCount;
+	}
+	
+	public void setEatCount()
+	{
+		this.eatCount += 1;
+	}
+	
+	public boolean getChanges()
+	{
+		return this.coordChanged;
+	}
+	
+	public void setChanges(boolean state)
+	{
+		if(state)
+		{
+			this.coordChanged = true;
+		}
+	}
+	
+	public String getAnimalName()
+	{
+		return this.name;
+	}
+	
+	public int getSize()
+	{
+		return this.size;
+	}
+	
+	public void eatInc()
+	{
+		this.eatCount++;
+	}
 
 }
