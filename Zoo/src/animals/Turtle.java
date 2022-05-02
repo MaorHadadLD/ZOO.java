@@ -30,6 +30,13 @@ public class Turtle extends Chew{
 		MessageUtility.logConstractor("Turtle", name);
 	}
 	
+	public Turtle(int size,String color,int hoerSpeed,int verSpeed)
+	{
+		super(startLocation,size,color,hoerSpeed,verSpeed);
+		super.setDiet(turtleDite);
+		super.setWeight(size * 0.5);
+	}
+	
 	public boolean setAge(int turtleAge)
 	{
 		if(turtleAge > 500 || turtleAge < 0)

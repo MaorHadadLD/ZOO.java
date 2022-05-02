@@ -1,6 +1,7 @@
 package graphics;
 import java.awt.*;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -24,9 +25,11 @@ import zoo.*;
 
 public class ZooFrame extends JFrame implements ActionListener{
 	
+   // private static final String BACKGROUND_PATH = "C://Users//User//git//java-codes//ZOO2//src//graphics//savanna.jpg";
 	static JFrame frame;
 	static JLabel label;
 	static Image pic;
+	static ZooPanel zooPanel;
 	private JMenu file;
 	private JMenu background;
 	private JMenu help;
@@ -35,13 +38,14 @@ public class ZooFrame extends JFrame implements ActionListener{
 	private JMenuItem green;
 	private JMenuItem none;
 	private JMenuItem help1;
-	JButton addAnimal;
-	JButton moveAnimal;
-	JButton clear;
-	JButton food;
-	JButton info;
-	JButton exit1;
-
+	private JButton addAnimal;
+	private JButton moveAnimal;
+	private JButton clear;
+	private JButton food;
+	private JButton info;
+	private JButton exit1;
+	private JButton exit2;
+	private JPanel panel;
 	private BufferedImage pic2; 
 	
 	
@@ -53,8 +57,28 @@ public class ZooFrame extends JFrame implements ActionListener{
 		this.setSize(900, 600); //sets the x-dimension, and y-dimension of frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit out of application
 		this.setLocationRelativeTo(null);
-		setLayout(new BorderLayout());
 		label = new JLabel();
+		panel = new JPanel(); 
+		addAnimal = new JButton("Add Animal");
+		addAnimal.addActionListener(this);
+		panel.add(addAnimal);
+		moveAnimal = new JButton("Move Animal");
+		moveAnimal.addActionListener(this);
+		panel.add(moveAnimal);
+		clear = new JButton("Clear");
+		clear.addActionListener(this);
+		panel.add(clear);
+		food = new JButton("Food");
+		food.addActionListener(this);
+		panel.add(food);
+		info = new JButton("Info");
+		info.addActionListener(this);
+		panel.add(info);
+		exit1 = new JButton("Exit");
+		exit1.addActionListener(this);
+		panel.add(exit1);
+		
+		this.setLayout(new BorderLayout());
 		JMenuBar mub = new JMenuBar();
 		this.setJMenuBar(mub);
 		file = new JMenu("File");
@@ -78,16 +102,46 @@ public class ZooFrame extends JFrame implements ActionListener{
 		green.addActionListener(this);
 		none.addActionListener(this);
 		help1.addActionListener(this);
+		this.add(panel,BorderLayout.SOUTH);
+		//this.setLayout(new BorderLayout());
 		this.setVisible(true);
+		
+//		label = new JLabel();
+//		panel1 = new JPanel();
+//		zooPanel = new ZooPanel();
+//		this.add(zooPanel);
+//		panel1.setLayout(new FlowLayout());
+//		addAnimal = new JButton("Add animal");
+//		panel1.add(addAnimal);
+//		addAnimal.addActionListener(this);
+//		moveAnimal = new JButton("Move animal");
+//		panel1.add(moveAnimal);
+//		moveAnimal.addActionListener(this);
+//		clear = new JButton("Clear");
+//		panel1.add(clear);
+//		clear.addActionListener(this);
+//		food = new JButton("Food");
+//		panel1.add(food);
+//		food.addActionListener(this);
+//		info = new JButton("Info");
+//		panel1.add(info);
+//		info.addActionListener(this);
+//		exit2 = new JButton("Exit");
+//		panel1.add(exit2);
+//		exit2.addActionListener(this);
+		addAnimal.setFocusable(false);
+		moveAnimal.setFocusable(false);
+		clear.setFocusable(false);
+		food.setFocusable(false);
+		info.setFocusable(false);
+		exit1.setFocusable(false);
+		
+		
+		
 	}
 	
-	//public void paintComponent(Graphics g) {
-		 //super.paintComponent(g) ;
-
-		// if(pic2!=null)
-		//g.drawImage(pic2,0,0,getWidth(),getHeight(), this);
-		// .....
-		//}
+	
+	
 	
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -99,12 +153,12 @@ public class ZooFrame extends JFrame implements ActionListener{
 		
 		if(e.getSource() == image)
 		{
-			//try { pic2 = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
-			//catch (IOException e1) { System.out.println("Cannot load image");}
-			label = new JLabel(new ImageIcon("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg"));
-			this.add(label);
+//			 try { pic2 = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
+//			 catch (IOException ef) { System.out.println("Cannot load image"); }
+   	        label=new JLabel(new ImageIcon("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg"));
+	    	this.add(label);
 		}
-		//repait();
+		
 		//}
 		//setLayout(new FlowLayout());
 		 //label = new JLabel();
@@ -123,14 +177,17 @@ public class ZooFrame extends JFrame implements ActionListener{
 			this.getContentPane().setBackground(null);
 		}
 		
-		if(e.getSource() == help)
+		if(e.getSource() == help1)
 		{
-			JFrame frameMessage = new JFrame("Message");
+//			JOptionPane.showMessageDialog(this, "Home Work 2\nGUI");
+			
+			JFrame newFrame = new JFrame("Message");
 			JLabel label1 = new JLabel ("<html>Home Work 2<br/>GUI</html>");
-			frameMessage.setSize(300,300);
-			frameMessage.setVisible(true);
-			frameMessage.add(label1);
-			ImageIcon icon = new ImageIcon("about.jpeg");
+			newFrame.setSize(300,300);
+			newFrame.setVisible(true);
+			newFrame.add(label1);
+			newFrame.add(label1,BorderLayout.CENTER);
+			ImageIcon icon = new ImageIcon("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//helppic.jpeg");
 			label1.setIcon(icon);
 			JButton buttonOk = new JButton("OK");
 			buttonOk.setFocusable(false);
@@ -139,11 +196,25 @@ public class ZooFrame extends JFrame implements ActionListener{
 			buttonOk.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e)
 				{
-				 frameMessage.dispose();
+					newFrame.dispose();
 				}
 				});
+		}
+		if(e.getSource()==addAnimal)
+		{
+			AddAnimalDialog aad=new AddAnimalDialog(zooPanel);
+		}
+//		if(e.getSource()==moveAnimal)
+//		{
+//			MoveAnimalDialog mad=new MoveAnimalDialog(zooPanel);
+//		}
+		if(e.getSource()==clear)
+		{
+			zooPanel.clearList();
+		}
+		if(e.getSource()==food)
+		{
 			
-			 
 		}
 		
 	}

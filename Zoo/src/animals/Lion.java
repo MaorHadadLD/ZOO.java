@@ -29,6 +29,13 @@ public class Lion extends Roar{
 		MessageUtility.logConstractor("Lion", name);
 	}
 	
+	public Lion(int size, String color, int horSpeed, int verSpeed)
+	{
+		super(stratLOcation,size,color,horSpeed,verSpeed);
+		super.setDiet(lionDiet);
+		super.setWeight(size * 0.8);
+	}
+	
 	public int getScars()
 	{
 		MessageUtility.logGetter(this.getName(), "getScars()", this.scarCount);

@@ -30,6 +30,13 @@ public class Giraffe extends Chew{
 		MessageUtility.logConstractor("Giraffe", name);
 	}
 	
+	public Giraffe(int size,String color,int hoerSpeed,int verSpeed)
+	{
+		super(startLocation,size,color,hoerSpeed,verSpeed);
+		super.setDiet(giraffeDiet);
+		super.setWeight(size * 2.2);
+	}
+	
 	public boolean setNeckLength(double neckl)
 	{
 		if(neckl < 1.0 || neckl > 2.5)

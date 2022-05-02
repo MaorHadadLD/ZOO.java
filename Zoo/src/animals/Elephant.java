@@ -31,6 +31,13 @@ public class Elephant extends Chew{
 		
 	}
 	
+	public Elephant(int size,String color,int hoerSpeed,int verSpeed)
+	{
+		super(startLocation,size,color,hoerSpeed,verSpeed);
+		super.setDiet(elephantDiet);
+		super.setWeight(size * 10);
+	}
+	
 	public boolean setTrunkLength(double trunkl)
 	{
 		if(trunkl > 3.5 || trunkl < 0.5)

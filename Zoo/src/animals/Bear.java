@@ -29,6 +29,13 @@ public class Bear extends Roar{
 		MessageUtility.logConstractor("Bear", name);
 	}
 	
+	public Bear(int size,String color,int hoerSpeed,int verSpeed)
+	{
+		super(stratLocation,size,color,hoerSpeed,verSpeed);
+		super.setDiet(bearDiet);
+		super.setWeight(size * 1.5);
+	}
+	
 	public boolean setFurColor(String furColor)
 	{
 		if(furColor.equals("GRAY") || furColor.equals("WHITE") || furColor.equals("BLACK"))
