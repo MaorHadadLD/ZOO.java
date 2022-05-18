@@ -19,24 +19,26 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 	private JComboBox<Object> horSpeedBox;
 	private JComboBox<Object> verSpeedBox;
 	private JButton create;
-	private String animalColor=" ";
-	private String animaName=" ";
-	private String colors[]={"Natural","Red","Blue"};
-	private String animals[]= {"Lion","Bear","Elephant","Giraffe","Turtle"};
-	private String intNums[]= {"1","2","3","4","5","6","7","8","9","10"};
+	private String animalColor="Emptey";
+	private String animalName;
+	private String colors[]={" ","Natural","Red","Blue"};
+	private String animals[]= {" ","Lion","Bear","Elephant","Giraffe","Turtle"};
+	private String intNums[]= {" ","1","2","3","4","5","6","7","8","9","10"};
 	private JTextField size;
-	private int animalType=0,horSpeed=0,verSpeed=0,size1,lionCount=0,bearCount=0,elephantCount=0,giraffeCount=0,turtleCount=0;
+	private int animalType=0,horSpeed=0,verSpeed=0,size1 = 0,lionCount=0,bearCount=0,elephantCount=0,giraffeCount=0,turtleCount=0;
 	private ZooPanel zooPanel;
 	private Animal newAnimal;
 	
-	public AddAnimalDialog(ZooPanel zoopanel1)
+	public AddAnimalDialog(ZooPanel zoopane1)
 	{
 		
 		super();
+		size = new JTextField();
 		zooPanel = new ZooPanel();
-		this.zooPanel = zoopanel1;
+		this.zooPanel = zoopane1;
 		//panel=new JPanel();
 		create=new JButton("Create");
+		create.addActionListener(this);
 		aanimalBox=new JComboBox<Object>(animals);
 		colorBox=new JComboBox<Object>(colors);
 		horSpeedBox=new JComboBox<Object>(intNums);
@@ -58,16 +60,14 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 		this.add(label4);
 		this.add(verSpeedBox);
 		verSpeedBox.addActionListener(this);
-		size = new JTextField();
 		this.add(label5);
 		this.add(colorBox);
 		colorBox.addActionListener(this);
 		this.setLayout(new GridLayout(6, 1));
 		this.setSize(400, 200);
 		this.setVisible(true);
+		this.setTitle("Add animal");
 		this.add(create);
-		
-		
 	}
 	
 	
@@ -77,42 +77,38 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == aanimalBox)
 		{
-			if(aanimalBox.getSelectedIndex() == 0)
+			if(aanimalBox.getSelectedIndex() == 1)
 			{
 				animalType = 1;
 			}
-			else if(aanimalBox.getSelectedIndex() == 1)
+			else if(aanimalBox.getSelectedIndex() == 2)
 			{
 				animalType = 2;
 			}
-			else if(aanimalBox.getSelectedIndex() == 2)
+			else if(aanimalBox.getSelectedIndex() == 3)
 			{
 				animalType = 3;
 			}
-			else if(aanimalBox.getSelectedIndex() == 3)
+			else if(aanimalBox.getSelectedIndex() == 4)
 			{
 				animalType = 4;
 			}
-			else if(aanimalBox.getSelectedIndex() == 4)
+			else if(aanimalBox.getSelectedIndex() == 5)
 			{
 				animalType = 5;
 			}
 		}
 		else if(e.getSource() == horSpeedBox)
 		{
-			horSpeed = horSpeedBox.getSelectedIndex() + 1;
+			horSpeed = horSpeedBox.getSelectedIndex();
 		}
 		else if(e.getSource() == verSpeedBox)
 		{
-			verSpeed = verSpeedBox.getSelectedIndex() + 1;
+			verSpeed = verSpeedBox.getSelectedIndex();
 		}
 		else if(e.getSource() == colorBox)
 		{
-			if(colorBox.getSelectedIndex() == 0)
-			{
-				animalColor = colors[0];
-			}
-			else if(colorBox.getSelectedIndex() == 1)
+			if(colorBox.getSelectedIndex() == 1)
 			{
 				animalColor = colors[1];
 			}
@@ -120,64 +116,96 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 			{
 				animalColor = colors[2];
 			}
+			else if(colorBox.getSelectedIndex() == 3)
+			{
+				animalColor = colors[3];
+			}
 		}
 		else if(e.getSource() == create)
 		{
-			if(animalType == 0 || animalColor == " " || horSpeed == 0 || verSpeed == 0)
+			if(animalType == 0 || animalColor == "Emptey" || horSpeed == 0 || verSpeed == 0)
 			{
-				JOptionPane.showMessageDialog(null, "Missing deatails");
+				JOptionPane.showMessageDialog(null, "Some details are missing");
 			}
-			else
+			else 
 			{
-				if(animalType == 1)
+				size1 = Integer.parseInt(size.getText());
+				if(size1 > 49 && size1 < 301)
 				{
-					lionCount++;
-					animaName = "Lion" + lionCount;
-					newAnimal = Lion(size1,animalColor,horSpeed,verSpeed);
-					zooPanel.setArraySize(zooPanel.getArraysize() + 1);
-					zooPanel.animalList.add(newAnimal);
-					zooPanel.setListOfAnimals(name);
-					JOptionPane.showMessageDialog(null, "Animal added");
-				}
-				else if(animalType == 2)
-				{
-					bearCount++;
-					animaName = "Bear" + bearCount;
-					newAnimal = new Bear(size1,animalColor,horSpeed,verSpeed);
-					zooPanel.setArraySize(zooPanel.getArraysize() + 1);
-					zooPanel.animalList.add(newAnimal);
-					zooPanel.setListOfAnimals(name);
-					JOptionPane.showMessageDialog(null, "Animal added");
-				}
-				else if(animalType == 3)
-				{
-					elephantCount++;
-					animaName = "Bear" + elephantCount;
-					newAnimal = new Elephant(size1,animalColor,horSpeed,verSpeed);
-					zooPanel.setArraySize(zooPanel.getArraysize() + 1);
-					zooPanel.animalList.add(newAnimal);
-					zooPanel.setListOfAnimals(name);
-					JOptionPane.showMessageDialog(null, "Animal added");
-				}
-				else if(animalType == 4)
-				{
-					giraffeCount++;
-					animaName = "Bear" + giraffeCount;
-					newAnimal = new Giraffe(size1,animalColor,horSpeed,verSpeed);
-					zooPanel.setArraySize(zooPanel.getArraysize() + 1);
-					zooPanel.animalList.add(newAnimal);
-					zooPanel.setListOfAnimals(name);
-					JOptionPane.showMessageDialog(null, "Animal added");
+					if(animalType == 1)
+					{
+						lionCount++;
+						animalName = "Lion" + lionCount;
+						newAnimal = new Lion(size1,animalColor,horSpeed,verSpeed);
+						newAnimal.setName(animalName);
+						zooPanel.setArraySize(zooPanel.getArraysize() + 1);
+						zooPanel.animalist.add(newAnimal);
+						zooPanel.setListofanimals(animalName);
+						newAnimal.setChanges(true);
+						newAnimal.loadImages("lio");
+						zooPanel.managZoo();
+						JOptionPane.showMessageDialog(null, "Animal add");
+					}
+					else if(animalType == 2)
+					{
+						bearCount++;
+						animalName = "Bear" + bearCount;
+						newAnimal = new Bear(size1,animalColor,horSpeed,verSpeed);
+						newAnimal.setName(animalName);
+						zooPanel.setArraySize(zooPanel.getArraysize() + 1);
+						zooPanel.animalist.add(newAnimal);
+						zooPanel.setListofanimals(animalName);
+						newAnimal.setChanges(true);
+						newAnimal.loadImages("bea");
+						zooPanel.managZoo();
+						JOptionPane.showMessageDialog(null, "Animal add");
+					}
+					else if(animalType == 3)
+					{
+						elephantCount++;
+						animalName = "Elephant" + elephantCount;
+						newAnimal = new Elephant(size1,animalColor,horSpeed,verSpeed);
+						newAnimal.setName(animalName);
+						zooPanel.setArraySize(zooPanel.getArraysize() + 1);
+						zooPanel.animalist.add(newAnimal);
+						zooPanel.setListofanimals(animalName);
+						newAnimal.setChanges(true);
+						newAnimal.loadImages("elf");
+						zooPanel.managZoo();
+						JOptionPane.showMessageDialog(null, "Animal add");
+					}
+					else if(animalType == 4)
+					{
+						giraffeCount++;
+						animalName = "Giraffe" + giraffeCount;
+						newAnimal = new Giraffe(size1,animalColor,horSpeed,verSpeed);
+						newAnimal.setName(animalName);
+						zooPanel.setArraySize(zooPanel.getArraysize() + 1);
+						zooPanel.animalist.add(newAnimal);
+						zooPanel.setListofanimals(animalName);
+						newAnimal.setChanges(true);
+						newAnimal.loadImages("grf");
+						zooPanel.managZoo();
+						JOptionPane.showMessageDialog(null, "Animal add");
+					}
+					else if(animalType == 5)
+					{
+						turtleCount++;
+						animalName = "Turtle" + turtleCount;
+						newAnimal = new Turtle(size1,animalColor,horSpeed,verSpeed);
+						newAnimal.setName(animalName);
+						zooPanel.setArraySize(zooPanel.getArraysize() + 1);
+						zooPanel.animalist.add(newAnimal);
+						zooPanel.setListofanimals(animalName);
+						newAnimal.setChanges(true);
+						newAnimal.loadImages("trt");
+						zooPanel.managZoo();
+						JOptionPane.showMessageDialog(null, "Animal add");
+					}
 				}
 				else
 				{
-					turtleCount++;
-					animaName = "Bear" + turtleCount;
-					newAnimal = new Turtle(size1,animalColor,horSpeed,verSpeed);
-					zooPanel.setArraySize(zooPanel.getArraysize() + 1);
-					zooPanel.animalList.add(newAnimal);
-					zooPanel.setListOfAnimals(name);
-					JOptionPane.showMessageDialog(null, "Animal added");
+					JOptionPane.showMessageDialog(null, "The size of the animal must be between 50 and 300 ");
 				}
 			}
 		}

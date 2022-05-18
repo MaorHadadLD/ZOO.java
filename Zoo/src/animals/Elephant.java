@@ -86,4 +86,22 @@ public class Elephant extends Chew{
 		return "[Elephant]:" + this.getName();
 	}
 
+	@Override
+	public boolean setLocation(Point newLocation) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public void loadmages(String nm) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

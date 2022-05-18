@@ -1,13 +1,22 @@
 package animals;
 import food.*;
+
 import mobility.*;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import diet.IDiet;
 import utilities.MessageUtility;
 import graphics.*;
 
 public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior{
 	private String name;
-	private double weight;
+	protected double weight;
 	private IDiet diet;
 	private final int EATÉDISTANCE = 5;
 	private int size;
@@ -45,6 +54,11 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 		this.verSpeed = verSpeed;
 	}
 	
+    public void Animal1(Point startLocation, int size, String color, int hoerSpeed, int verSpeed) {
+		
+    	Animal1(startLocation,size,color,hoerSpeed,verSpeed);
+	}
+	
 	public double getWeight()
 	{
 		MessageUtility.logGetter(name, "getWeight()", this.weight);
@@ -53,7 +67,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 	
 	public String getName()
 	{
-		MessageUtility.logGetter(name, "getNmae()", this.name);
+		MessageUtility.logGetter(name, "getName()", this.name);
 		return this.name;
 	}
 	
@@ -89,16 +103,17 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 		return this.diet;
 	}
 	
-	public double move(Point point1)
+	public boolean move(Point pointA)
 	{
-		double distance1 = calcDistance(point1);
+		double distance1 = calcDistance(pointA);
 		if(distance1 > 0)
 		{
-			super.setLocation(point1);
+			super.setLocation(pointA);
 			super.setTotalDistance(distance1);
 			this.weight -= (distance1 * weight * 0.00025);
+			return true;
 		}
-		return distance1;
+		return false;
 	}
 	
 	public abstract void makeSound();
@@ -112,7 +127,7 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 		return this.eatCount;
 	}
 	
-	public void setEatCount()
+	public void setEatCount(int totalS)
 	{
 		this.eatCount += 1;
 	}
@@ -144,5 +159,203 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 	{
 		this.eatCount++;
 	}
+	
+	public int getHorSpeed()
+	{
+		return horSpeed;
+	}
+	
+	public int getVerSpeed()
+	{
+		return verSpeed;
+	}
+	
+	public void drawObject(Graphics g)
+	{
+		if(this.x_dir==1) 
+		 {
+			 g.drawImage(img1, this.getLocation().getx()-this.size/2, this.getLocation().gety()-this.size/10, this.size/2, this.size, this.pan);
+		 }
+		
+		 else 
+		 {
+			 g.drawImage(img2, this.getLocation().getx(), this.getLocation().gety()-this.size/10, this.size/2, this.size, this.pan);
+		 }
+
+	}
+	
+	public void loadImages(String nm)
+	{
+		if (nm == "lio")
+		{
+			if( col == "Natural")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_" + "n_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Red")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Blue")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+		}
+		if (nm == "bea")
+		{
+			if( col == "Natural")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_" + "n_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Red")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Blue")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+		}
+		if (nm == "elf")
+		{
+			if( col == "Natural")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_" + "n_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Red")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Blue")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+		}
+		if (nm == "grf")
+		{
+			if( col == "Natural")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_" + "n_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Red")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Blue")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+		}if (nm == "trt")
+		{
+			if( col == "Natural")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_" + "n_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Red")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+			if(col == "Blue")
+			{
+				try {
+					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Animal drawed");
+			}
+		}
+	}
+
+	
+	
+
+	
+
 
 }

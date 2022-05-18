@@ -2,37 +2,40 @@ package plants;
 
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+
 import food.EFoodType;
 import food.IEdible;
-import mobility.ILocatable;
+import graphics.IDrawable;
+import graphics.ZooPanel;
+import mobility.Ilocatable;
 import mobility.Point;
 import utilities.MessageUtility;
-
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 /**
  * @author baroh
  *
  */
-public abstract class Plant implements IEdible, ILocatable, IDrawable {
-	/**
-	 * 
-	 */
+public abstract class Plant implements IEdible, Ilocatable, IDrawable {
+	
+	
+	
 	private double height;
-	/**
-	 * 
-	 */
 	private Point location;
-	/**
-	 * 
-	 */
 	private double weight;
+	private BufferedImage image = null;
+	private ZooPanel zooPa;
+	
+	
 
-	/**
-	 * 
-	 */
+	
 	public Plant() {
 		Random rand = new Random();
-		int x = rand.nextInt(30);
-		int y = rand.nextInt(12);
+		int x = rand.nextInt(300);
+		int y = rand.nextInt(400);
 		this.location = new Point(x, y);
 		this.height = rand.nextInt(30);
 		this.weight = rand.nextInt(12);
@@ -132,6 +135,42 @@ public abstract class Plant implements IEdible, ILocatable, IDrawable {
 	@Override
 	public String toString() {
 		return "[" + this.getClass().getSimpleName() + "] ";
+	}
+	
+	public void loadImage(String nameMain)
+	{
+		if(nameMain == "cabbage")
+		{
+			try {
+                this.image = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nameMain + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+		}
+		else if(nameMain == "lettuce")
+		{
+			try {
+                this.image = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nameMain + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+		}
+	}
+	
+	public void drawObject(Graphics g)
+	{
+		g.drawImage(image, 400, 300, 30, 30, 0, 0, 0, 0, zooPa);
+		zooPa.managZoo();
+	}
+	
+	public String getColor()
+	{
+		return null;
+	}
+	
+	public EFoodType getFoodType()
+	{
+		return EFoodType.VEGETABLE;
 	}
 
 }

@@ -19,5 +19,18 @@ public abstract class Chew extends Animal{
 	{
 		chew();
 	}
+	
+	public boolean move(Point pointA)
+	{
+		double distance1 = calcDistance(pointA);
+		if(distance1 > 0)
+		{
+			super.setLocation(pointA);
+			super.setTotalDistance(distance1);
+			this.weight -= (distance1 * weight * 0.00025);
+			return true;
+		}
+		return false;
+	}
 
 }

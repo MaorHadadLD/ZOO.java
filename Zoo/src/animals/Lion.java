@@ -3,7 +3,13 @@ import mobility.Point;
 import diet.Carnivore;
 import diet.IDiet;
 import food.*;
+import graphics.Graphics;
+
+import java.awt.Graphics2D;
 import java.util.Random;
+
+import javax.swing.JTextField;
+
 import utilities.MessageUtility;
 
 public class Lion extends Roar{
@@ -81,6 +87,30 @@ public class Lion extends Roar{
 	public String toString()
 	{
 		return "[Lion]:" + this.getName();
+	}
+
+	@Override
+	public void loadmages(String nm) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drawObject(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean setLocation(Point newLocation) {
+		
+		return true;
 	}
 
 }

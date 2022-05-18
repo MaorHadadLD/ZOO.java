@@ -26,8 +26,8 @@ import zoo.*;
 public class ZooFrame extends JFrame implements ActionListener{
 	
    // private static final String BACKGROUND_PATH = "C://Users//User//git//java-codes//ZOO2//src//graphics//savanna.jpg";
-	static JFrame frame;
-	static JLabel label;
+	static JFrame frame, fooda;
+	static JLabel label, lf, l2;
 	static Image pic;
 	static ZooPanel zooPanel;
 	private JMenu file;
@@ -44,9 +44,10 @@ public class ZooFrame extends JFrame implements ActionListener{
 	private JButton food;
 	private JButton info;
 	private JButton exit1;
-	private JButton exit2;
 	private JPanel panel;
 	private BufferedImage pic2; 
+	moveAnimalDialog ma;
+	AddAnimalDialog ad;
 	
 	
 	
@@ -57,8 +58,10 @@ public class ZooFrame extends JFrame implements ActionListener{
 		this.setSize(900, 600); //sets the x-dimension, and y-dimension of frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit out of application
 		this.setLocationRelativeTo(null);
+		zooPanel = new ZooPanel();
 		label = new JLabel();
-		panel = new JPanel(); 
+		l2 = new JLabel();
+		panel = new JPanel();
 		addAnimal = new JButton("Add Animal");
 		addAnimal.addActionListener(this);
 		panel.add(addAnimal);
@@ -105,30 +108,6 @@ public class ZooFrame extends JFrame implements ActionListener{
 		this.add(panel,BorderLayout.SOUTH);
 		//this.setLayout(new BorderLayout());
 		this.setVisible(true);
-		
-//		label = new JLabel();
-//		panel1 = new JPanel();
-//		zooPanel = new ZooPanel();
-//		this.add(zooPanel);
-//		panel1.setLayout(new FlowLayout());
-//		addAnimal = new JButton("Add animal");
-//		panel1.add(addAnimal);
-//		addAnimal.addActionListener(this);
-//		moveAnimal = new JButton("Move animal");
-//		panel1.add(moveAnimal);
-//		moveAnimal.addActionListener(this);
-//		clear = new JButton("Clear");
-//		panel1.add(clear);
-//		clear.addActionListener(this);
-//		food = new JButton("Food");
-//		panel1.add(food);
-//		food.addActionListener(this);
-//		info = new JButton("Info");
-//		panel1.add(info);
-//		info.addActionListener(this);
-//		exit2 = new JButton("Exit");
-//		panel1.add(exit2);
-//		exit2.addActionListener(this);
 		addAnimal.setFocusable(false);
 		moveAnimal.setFocusable(false);
 		clear.setFocusable(false);
@@ -183,7 +162,7 @@ public class ZooFrame extends JFrame implements ActionListener{
 			
 			JFrame newFrame = new JFrame("Message");
 			JLabel label1 = new JLabel ("<html>Home Work 2<br/>GUI</html>");
-			newFrame.setSize(300,300);
+			newFrame.setSize(500,300);
 			newFrame.setVisible(true);
 			newFrame.add(label1);
 			newFrame.add(label1,BorderLayout.CENTER);
@@ -200,21 +179,61 @@ public class ZooFrame extends JFrame implements ActionListener{
 				}
 				});
 		}
-		if(e.getSource()==addAnimal)
+		if(e.getSource()== addAnimal)
 		{
-			AddAnimalDialog aad=new AddAnimalDialog(zooPanel);
+			 ad = new AddAnimalDialog(zooPanel);
 		}
-//		if(e.getSource()==moveAnimal)
-//		{
-//			MoveAnimalDialog mad=new MoveAnimalDialog(zooPanel);
-//		}
+		if(e.getSource() == moveAnimal)
+		{
+			ma = new moveAnimalDialog(zooPanel);
+		}
 		if(e.getSource()==clear)
 		{
 			zooPanel.clearList();
 		}
 		if(e.getSource()==food)
 		{
-			
+			fooda = new JFrame("Food for animal");
+			lf = new JLabel("Please choose food");
+			fooda.setSize(500,300);
+			fooda.setVisible(true);
+			fooda.add(lf);
+			ImageIcon icon2 = new ImageIcon("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//helppic.jpeg");
+			lf.setIcon(icon2);
+			JButton buttonm = new JButton("Meat");
+			buttonm.setFocusable(false);
+			buttonm.setBounds(240,200,100,20);
+			lf.add(buttonm);
+			buttonm.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e)
+				{
+					fooda.dispose();
+				}
+				});
+			JButton buttonc = new JButton("Cabbage");
+			buttonc.setFocusable(false);
+			buttonc.setBounds(130,200,100,20);
+			lf.add(buttonc);
+			buttonc.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e)
+				{
+					fooda.dispose();
+				}
+				});
+			JButton buttonl = new JButton("Lettuce");
+			buttonl.setFocusable(false);
+			buttonl.setBounds(20,200,100,20);
+			lf.add(buttonl);
+			buttonl.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e)
+				{
+					fooda.dispose();
+				}
+				});
+		}
+		if(e.getSource() == exit1)
+		{
+			System.exit(0);
 		}
 		
 	}

@@ -29,35 +29,47 @@ public class ZooPanel extends JPanel implements ActionListener{
 	private JButton exit;
 	private JPanel jpanel;
 	private Image img;
-	static ArrayList animaList = new ArrayList<Animal>();
+	ArrayList<Animal> animalist = new ArrayList<Animal>();
 	private int arraySize = 0;
-	private ArrayList<String> listOfOnimal = new ArrayList<String>();
+	private ArrayList<String> listOfanimal = new ArrayList<String>();
+	//static ArrayList<Animal> animalList = new ArrayList<Animal>();
 	
 	public ZooPanel()
 	{
+		this.setBackground(null);
 		this.setVisible(true);
+		try{ img = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
+   	 catch (IOException ie) { System.out.println("Cannot load image"); }
 	}
 	
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
-	    Graphics2D g2d = (Graphics2D) g;
 
 		 if(img!=null)
 		 {
-		   g2d.drawImage(img,0,0,getWidth(),getHeight(), this);
+		   g.drawImage(img,0,0,getWidth(),getHeight(), this);
+		 }
+		 else if(this.arraySize > 0)
+		 {
+			 animalist.get(0).drawObject(g);
 		 }
 		 
 		}
+	
+//	public void drawObject(Graphics g)
+//	{
+//		g.drawImage(img,0,0,getWidth(),getHeight(), this);
+//	}
 	
 	public void setBackGround(int num)
 	{
 		if(num == 0)
 		{
 			this.setBackground(null);
-			 try { img = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
-			 catch (IOException e) { System.out.println("Cannot load image"); }
-			 this.paintComponent(getGraphics());
+//			 try { img = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
+//			 catch (IOException e) { System.out.println("Cannot load image"); }
+			 this.repaint();
 		}
 		else if(num == 1)
 		{
@@ -77,7 +89,7 @@ public class ZooPanel extends JPanel implements ActionListener{
 		
 	}
 	
-	public void setArraySize(int num)
+	public  void setArraySize(int num)
 	{
 		try
 		{
@@ -94,6 +106,17 @@ public class ZooPanel extends JPanel implements ActionListener{
 		{
 			JOptionPane.showMessageDialog(null, "number not in range");
 		}
+		
+	}
+	
+	public  void setListofanimals(String name) {
+		
+		this.listOfanimal.add(name);
+	}
+	
+	public ArrayList<String> getListOfAnimal()
+	{
+		return listOfanimal;
 	}
 	
 	public int getArraysize()
@@ -101,14 +124,34 @@ public class ZooPanel extends JPanel implements ActionListener{
 		return this.arraySize;
 	}
 	
-	public void setListofanimals(String name) {
-		this.listOfOnimal.add(name);
-	}
+	
 	
 	public void clearList()
 	{
-		animaList.clear();
+		animalist.clear();
 		arraySize = 0;
 	}
+	
+	public boolean isChange()
+	{
+		for(int i = 0; i < this.arraySize; i++)
+		{
+			if(animalist.get(i).getChanges())
+			{
+				animalist.get(i).setChanges(false);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void managZoo()
+	{
+		if(isChange())
+		{
+			repaint();
+		}
+	}
+	
 
 }

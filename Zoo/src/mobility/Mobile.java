@@ -11,9 +11,9 @@ public abstract class Mobile implements Ilocatable{
 	{
 		if(setLocation(p))
 		{
-			this.location=new Point(p);
+			this.location= new Point(p);
 		}
-		this.totalDistance=0;
+		this.totalDistance = 0;
 	}
 	
 	public void addTotalDistance(double d1)
@@ -21,9 +21,9 @@ public abstract class Mobile implements Ilocatable{
 		this.totalDistance += d1;
 	}
 	
-	public double calcDistance(Point p2)
+	public double calcDistance(Point pointA)
 	{
-		return Math.sqrt(Math.pow(this.location.getx() - p2.getx(),2) + Math.pow(this.location.gety() - p2.gety(),2));
+		return Math.sqrt(Math.pow(this.location.getx() - pointA.getx(),2) + Math.pow(this.location.gety() - pointA.gety(),2));
 	}
 	
 	public Point getLocation()
@@ -31,7 +31,7 @@ public abstract class Mobile implements Ilocatable{
 		return this.location;
 	}
 	
-	public boolean setLocation(Point p)
+	public boolean setLocation(Point pointA)
 	{
 		return true;
 	}
@@ -50,5 +50,7 @@ public abstract class Mobile implements Ilocatable{
 	{
 		return this.totalDistance;
 	}
+	
+	
 
 }

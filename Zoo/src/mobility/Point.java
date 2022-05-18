@@ -47,4 +47,9 @@ public class Point {
 		return this.x + ", " + this.y;
 	}
 
+	public static boolean cheackBounderies(Point newLocation) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
