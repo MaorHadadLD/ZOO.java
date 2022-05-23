@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import FoodMeat.Meat;
 import animals.*;
 import diet.*;
 import food.*;
@@ -44,10 +45,14 @@ public class ZooFrame extends JFrame implements ActionListener{
 	private JButton food;
 	private JButton info;
 	private JButton exit1;
+	private JButton sleep;
+	private JButton wakeUp;
 	private JPanel panel;
-	private BufferedImage pic2; 
+	private BufferedImage pic1, pic2;
+	private Thread controller;
 	moveAnimalDialog ma;
 	AddAnimalDialog ad;
+	
 	
 	
 	
@@ -65,9 +70,15 @@ public class ZooFrame extends JFrame implements ActionListener{
 		addAnimal = new JButton("Add Animal");
 		addAnimal.addActionListener(this);
 		panel.add(addAnimal);
-		moveAnimal = new JButton("Move Animal");
-		moveAnimal.addActionListener(this);
-		panel.add(moveAnimal);
+//		moveAnimal = new JButton("Move Animal");
+//		moveAnimal.addActionListener(this);
+//		panel.add(moveAnimal);
+		sleep = new JButton("Sleep");
+		sleep.addActionListener(this);
+		panel.add(sleep);
+		wakeUp = new JButton("Wake up");
+		wakeUp.addActionListener(this);
+		panel.add(wakeUp);
 		clear = new JButton("Clear");
 		clear.addActionListener(this);
 		panel.add(clear);
@@ -114,6 +125,9 @@ public class ZooFrame extends JFrame implements ActionListener{
 		food.setFocusable(false);
 		info.setFocusable(false);
 		exit1.setFocusable(false);
+		this.add(zooPanel);
+		this.setSize(800,600);
+//		this.setVisible(true);
 		
 		
 		
@@ -181,15 +195,34 @@ public class ZooFrame extends JFrame implements ActionListener{
 		}
 		if(e.getSource()== addAnimal)
 		{
-			 ad = new AddAnimalDialog(zooPanel);
+			if(zooPanel.getArraysize() == 10)
+			{
+				JOptionPane.showMessageDialog(null, "Can not add animal");
+			}
+			else
+			{
+				ad = new AddAnimalDialog(zooPanel);
+			}
 		}
-		if(e.getSource() == moveAnimal)
+//		if(e.getSource() == moveAnimal)
+//		{
+//			ma = new moveAnimalDialog(zooPanel);
+//		}
+		if(e.getSource() == sleep)
 		{
-			ma = new moveAnimalDialog(zooPanel);
+			for(int i = 0; i < zooPanel.getArraysize(); i++)
+			{
+				
+			}
+		}
+		if(e.getSource() == wakeUp)
+		{
+			
 		}
 		if(e.getSource()==clear)
 		{
 			zooPanel.clearList();
+			zooPanel.managZoo();
 		}
 		if(e.getSource()==food)
 		{
@@ -207,6 +240,12 @@ public class ZooFrame extends JFrame implements ActionListener{
 			buttonm.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e)
 				{
+					Meat meat = new Meat(zooPanel);
+					zooPanel.setMeat(meat);
+					meat.loadmages("meat");
+					zooPanel.setPlant(null);
+					repaint();
+					zooPanel.managZoo();
 					fooda.dispose();
 				}
 				});
@@ -217,6 +256,12 @@ public class ZooFrame extends JFrame implements ActionListener{
 			buttonc.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e)
 				{
+					Cabbage cabbage = new Cabbage(zooPanel);
+					zooPanel.setPlant(cabbage);
+					cabbage.loadmages("cabbage");;
+					zooPanel.setMeat(null);
+					repaint();
+					zooPanel.managZoo();
 					fooda.dispose();
 				}
 				});
@@ -227,9 +272,28 @@ public class ZooFrame extends JFrame implements ActionListener{
 			buttonl.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e)
 				{
+					Lettuce lettuce = new Lettuce(zooPanel);
+					zooPanel.setPlant(lettuce);
+					lettuce.loadmages("lettuce");
+					zooPanel.setMeat(null);
+					repaint();
+					zooPanel.managZoo();
 					fooda.dispose();
 				}
 				});
+		}
+		if(e.getSource() == info)
+		{
+			JFrame tablef = new JFrame();
+			AnimalTable mod = new AnimalTable(zooPanel);
+			JTable table = new JTable(mod);
+			JDialog infotab = new JDialog(this, "info table", true);
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+			table.setFillsViewportHeight(true);
+			infotab.add(new JScrollPane(table));
+			infotab.pack();
+			infotab.setVisible(true);
 		}
 		if(e.getSource() == exit1)
 		{

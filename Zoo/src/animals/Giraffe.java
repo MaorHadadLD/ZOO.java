@@ -91,11 +91,11 @@ public class Giraffe extends Chew{
 		return true;
 	}
 
-	@Override
-	public void loadmages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void loadmages(String nm) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public String getColor() {

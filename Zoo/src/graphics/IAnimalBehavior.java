@@ -7,5 +7,7 @@ public interface IAnimalBehavior {
 	public void eatInc();
 	public int getEatCount();
 	public void setChanges(boolean state);
+	public void setSuspended();
+	public void setResumed();
 
 }

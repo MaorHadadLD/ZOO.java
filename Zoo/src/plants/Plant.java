@@ -134,23 +134,23 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
 	 */
 	@Override
 	public String toString() {
-		return "[" + this.getClass().getSimpleName() + "] ";
+		return "[" + this.getClass().getSimpleName() + "]";
 	}
 	
-	public void loadImage(String nameMain)
+	public void loadmages(String nm)
 	{
-		if(nameMain == "cabbage")
+		if(nm == "cabbage")
 		{
 			try {
-                this.image = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nameMain + ".png"));
+                this.image = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + ".png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
 		}
-		else if(nameMain == "lettuce")
+		else if(nm == "lettuce")
 		{
 			try {
-                this.image = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nameMain + ".png"));
+                this.image = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + ".png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

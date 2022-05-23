@@ -90,16 +90,16 @@ public class Lion extends Roar{
 	}
 
 	@Override
-	public void loadmages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void drawObject(Graphics2D g) {
-		// TODO Auto-generated method stub
-		
-	}
+//	public void loadmages(String nm) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void drawObject(Graphics2D g) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public String getColor() {

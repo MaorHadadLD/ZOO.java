@@ -33,7 +33,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 	{
 		
 		super();
-		size = new JTextField();
 		zooPanel = new ZooPanel();
 		this.zooPanel = zoopane1;
 		//panel=new JPanel();
@@ -51,6 +50,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 		this.add(label1);
 		this.add(aanimalBox);
 		aanimalBox.addActionListener(this);
+		size = new JTextField();
 		this.add(label2);
 		this.add(size);
 		size.addActionListener(this);
@@ -142,8 +142,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 						zooPanel.animalist.add(newAnimal);
 						zooPanel.setListofanimals(animalName);
 						newAnimal.setChanges(true);
-						newAnimal.loadImages("lio");
+						newAnimal.loadmages("lio");
 						zooPanel.managZoo();
+						zooPanel.animalist.get(zooPanel.getArraysize()).run();
 						JOptionPane.showMessageDialog(null, "Animal add");
 					}
 					else if(animalType == 2)
@@ -156,8 +157,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 						zooPanel.animalist.add(newAnimal);
 						zooPanel.setListofanimals(animalName);
 						newAnimal.setChanges(true);
-						newAnimal.loadImages("bea");
+						newAnimal.loadmages("bea");
 						zooPanel.managZoo();
+						zooPanel.animalist.get(zooPanel.getArraysize()).run();
 						JOptionPane.showMessageDialog(null, "Animal add");
 					}
 					else if(animalType == 3)
@@ -170,8 +172,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 						zooPanel.animalist.add(newAnimal);
 						zooPanel.setListofanimals(animalName);
 						newAnimal.setChanges(true);
-						newAnimal.loadImages("elf");
+						newAnimal.loadmages("elf");
 						zooPanel.managZoo();
+						zooPanel.animalist.get(zooPanel.getArraysize()).run();
 						JOptionPane.showMessageDialog(null, "Animal add");
 					}
 					else if(animalType == 4)
@@ -184,8 +187,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 						zooPanel.animalist.add(newAnimal);
 						zooPanel.setListofanimals(animalName);
 						newAnimal.setChanges(true);
-						newAnimal.loadImages("grf");
+						newAnimal.loadmages("grf");
 						zooPanel.managZoo();
+						zooPanel.animalist.get(zooPanel.getArraysize()).run();
 						JOptionPane.showMessageDialog(null, "Animal add");
 					}
 					else if(animalType == 5)
@@ -198,8 +202,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener{
 						zooPanel.animalist.add(newAnimal);
 						zooPanel.setListofanimals(animalName);
 						newAnimal.setChanges(true);
-						newAnimal.loadImages("trt");
+						newAnimal.loadmages("trt");
 						zooPanel.managZoo();
+						zooPanel.animalist.get(zooPanel.getArraysize()).run();
 						JOptionPane.showMessageDialog(null, "Animal add");
 					}
 				}

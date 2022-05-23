@@ -90,16 +90,28 @@ public class Bear extends Roar{
 		return true;
 	}
 
-	@Override
-	public void loadmages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void loadmages(String nm) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public String getColor() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setSuspended() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setResumed() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

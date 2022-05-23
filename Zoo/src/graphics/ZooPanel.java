@@ -17,7 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import FoodMeat.Meat;
 import animals.Animal;
+import plants.Plant;
 
 public class ZooPanel extends JPanel implements ActionListener{
 	
@@ -28,10 +30,14 @@ public class ZooPanel extends JPanel implements ActionListener{
 	private JButton info;
 	private JButton exit;
 	private JPanel jpanel;
-	private Image img;
+	private BufferedImage img = null;
 	ArrayList<Animal> animalist = new ArrayList<Animal>();
 	private int arraySize = 0;
 	private ArrayList<String> listOfanimal = new ArrayList<String>();
+	private double distance;
+	private Plant planet = null;
+	private Meat meat = null;
+	private boolean background = false;
 	//static ArrayList<Animal> animalList = new ArrayList<Animal>();
 	
 	public ZooPanel()
@@ -39,20 +45,32 @@ public class ZooPanel extends JPanel implements ActionListener{
 		this.setBackground(null);
 		this.setVisible(true);
 		try{ img = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
-   	 catch (IOException ie) { System.out.println("Cannot load image"); }
+   	 	catch (IOException ie) { System.out.println("Cannot load image"); }
 	}
 	
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
 
-		 if(img!=null)
+		 if(background)
 		 {
 		   g.drawImage(img,0,0,getWidth(),getHeight(), this);
 		 }
-		 else if(this.arraySize > 0)
+		 background = false;
+		 if(this.arraySize > 0)
 		 {
-			 animalist.get(0).drawObject(g);
+			 for(int i = 0; i < this.arraySize; i++)
+			 {
+			 animalist.get(i).drawObject(g);
+			 }
+		 }
+		 else if(planet != null)
+		 {
+			 planet.drawObject(g);
+		 }
+		 else if(meat != null)
+		 {
+			 meat.drawObject(g);
 		 }
 		 
 		}
@@ -67,8 +85,7 @@ public class ZooPanel extends JPanel implements ActionListener{
 		if(num == 0)
 		{
 			this.setBackground(null);
-//			 try { img = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
-//			 catch (IOException e) { System.out.println("Cannot load image"); }
+     		 background = true;
 			 this.repaint();
 		}
 		else if(num == 1)
@@ -109,9 +126,20 @@ public class ZooPanel extends JPanel implements ActionListener{
 		
 	}
 	
-	public  void setListofanimals(String name) {
+	public void setMeat(Meat meat)
+	{
+		this.meat = meat;
+	}
+	
+	public  void setListofanimals(String name) 
+	{
 		
 		this.listOfanimal.add(name);
+	}
+	
+	public void setPlant(Plant plant)
+	{
+		this.planet = plant;
 	}
 	
 	public ArrayList<String> getListOfAnimal()
@@ -130,6 +158,7 @@ public class ZooPanel extends JPanel implements ActionListener{
 	{
 		animalist.clear();
 		arraySize = 0;
+		
 	}
 	
 	public boolean isChange()
@@ -150,6 +179,47 @@ public class ZooPanel extends JPanel implements ActionListener{
 		if(isChange())
 		{
 			repaint();
+		}
+		else if(this.getArraysize() > 0)
+		{
+			for(int i = 0; i < this.getArraysize(); i++)
+			{
+				for(int j = 0; j < this.getArraysize(); j++)
+				{
+					distance = animalist.get(i).calcDistance(animalist.get(j).getLocation());
+					if(i != j && animalist.get(i).distanceCheck(distance) && animalist.get(i).eat(animalist.get(j)));
+					{
+						this.setArraySize(this.getArraysize() - 1);
+						animalist.remove(j);
+						repaint();
+					}
+				}
+			}
+		}
+		else if(this.planet != null)
+		{
+			for(int k = 0; k < this.getArraysize(); k++)
+			{
+				distance = animalist.get(k).calcDistance(this.planet.getLocation());
+				if(animalist.get(k).distanceCheck(distance) && animalist.get(k).eat(this.planet))
+				{
+					planet = null;
+					repaint();
+				}
+			}
+		}
+		else if(this.meat != null)
+		{
+			
+			for(int h = 0; h < this.arraySize; h++)
+			{
+				distance = animalist.get(h).calcDistance(this.meat.getLocation());
+				if(animalist.get(h).distanceCheck(distance) && animalist.get(h).eat(this.meat))
+				{
+					meat = null;
+					repaint();
+				}
+			}
 		}
 	}
 	

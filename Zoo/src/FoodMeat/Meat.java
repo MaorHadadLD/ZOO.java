@@ -95,7 +95,7 @@ public class Meat implements IEdible, Ilocatable, IDrawable{
 	
 	public String toString() 
 	{
-        return "[" + this.getClass().getSimpleName() + "] ";
+        return "[" + this.getClass().getSimpleName() + "]";
     }
 	
     

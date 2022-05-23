@@ -13,7 +13,7 @@ public class AnimalTable extends AbstractTableModel{
 	private ArrayList<Animal> data;
 	private ZooPanel zooP;
 	private final String[] columTaitels = {"Name", "Color", "Weight", "HorSpeed", "VerSpeed", "Eat counter"};
-	private int totalS = 0;
+	private int totalS = 0, size = 0;
 	private Animal animal;
 	
 	public AnimalTable(ZooPanel zooPa)
@@ -24,6 +24,7 @@ public class AnimalTable extends AbstractTableModel{
 		{
 			data.add(zooP.animalist.get(i));
 			totalS += zooP.animalist.get(i).getEatCount();
+			size++;
 		}
 		Point point1 = new Point(0, 0);
 		animal = new Animal("Total",point1) {
@@ -48,18 +49,31 @@ public class AnimalTable extends AbstractTableModel{
 				
 			}
 
-			@Override
-			public String getColor() {
-				// TODO Auto-generated method stub
-				return null;
-			}
+//			@Override
+//			public String getColor() {
+//				// TODO Auto-generated method stub
+//				return null;
+//			}
 
 			@Override
 			public void makeSound() {
 				// TODO Auto-generated method stub
 				
 			}
+
+			@Override
+			public void setSuspended() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void setResumed() {
+				// TODO Auto-generated method stub
+				
+			}
 		};
+		size++;
 		animal.setEatCount(totalS);
 		data.add(animal);
 		
@@ -69,7 +83,7 @@ public class AnimalTable extends AbstractTableModel{
 	@Override
 	public int getRowCount() {
 		
-		return zooP.getArraysize();
+		return size;
 	}
 
 	@Override

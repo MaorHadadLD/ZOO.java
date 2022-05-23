@@ -91,10 +91,10 @@ public class Turtle extends Chew{
 	}
 
 	@Override
-	public void loadmages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
+//	public void loadmages(String nm) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public String getColor() {
