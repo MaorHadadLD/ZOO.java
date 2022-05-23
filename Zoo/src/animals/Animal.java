@@ -10,12 +10,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import diet.IDiet;
 import utilities.MessageUtility;
 import graphics.*;
 
-public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior{
+public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnimalBehavior, Runnable
+{
 	private String name;
 	protected double weight;
 	private IDiet diet;
@@ -27,12 +29,13 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 	private boolean coordChanged;
 	protected Thread thread;
 	protected boolean threadSuspended = false;
-	private int x_dir;
-	private int y_dir;
+	private int x_dir = 1;
+	private int y_dir = 1;
 	private int eatCount;
 	private ZooPanel pan;
 	private BufferedImage img1, img2;
 	private int xcor, ycor;
+	private boolean flag = true;
 	
 	
 	
@@ -57,12 +60,13 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 		this.verSpeed = verSpeed;
 		this.size = size;
 		this.pan = zooP;
+		this.thread = new Thread(this);
 	}
 	
-    public void Animal1(Point startLocation, int size, String color, int hoerSpeed, int verSpeed) {
-		
-    	Animal1(startLocation,size,color,hoerSpeed,verSpeed);
-	}
+//    public void Animal1(Point startLocation, int size, String color, int hoerSpeed, int verSpeed) {
+//		
+//    	Animal1(startLocation,size,color,hoerSpeed,verSpeed);
+//	}
 	
 	public double getWeight()
 	{
@@ -150,12 +154,22 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 		}
 	}
 	
-	public void setSuspended()
+	public synchronized void setWait() throws InterruptedException
+	{
+		this.wait();
+	}
+	
+	public synchronized void setNotify() throws InterruptedException
+	{
+		this.notify();
+	}
+	
+	public synchronized void setSuspended()
 	{
 		this.threadSuspended = true;
 	}
 	
-	public void setResumed()
+	public synchronized void setResumed()
 	{
 		this.threadSuspended = false;
 	}
@@ -190,6 +204,10 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 		return verSpeed;
 	}
 	
+	public ZooPanel getPan()
+	{
+		return this.pan;
+	}
 	public void drawObject(Graphics g)
 	{
 		if(this.x_dir==1) 
@@ -206,174 +224,36 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 	
 	public void loadmages(String nm)
 	{
-		if (nm == "lio")
+		try
 		{
-			if( col == "Natural")
+			if(this.col == "Natural")
 			{
-				try {
+				
 					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + nm + "_n_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					this.img2 = ImageIO.read(new File(IDrawable.PICTURE_PATH + nm + "_n_2.png"));
 				System.out.println("Animal drawed");
 			}
-			if(col == "Red")
+			else if(this.col == "Red")
 			{
-				try {
+				
 					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + nm + "_r_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
+					this.img2 = ImageIO.read(new File(IDrawable.PICTURE_PATH + nm + "_r_2.png"));
+					System.out.println("Animal drawed");
 			}
-			if(col == "Blue")
+			else if(col == "Blue")
 			{
-				try {
+				
 					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + nm + "_b_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
+					this.img2 = ImageIO.read(new File(IDrawable.PICTURE_PATH + nm + "_b_2.png"));
+					System.out.println("Animal drawed");
 			}
-		}
-		else if (nm == "bea")
-		{
-			if( col == "Natural")
+			else
 			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_" + "n_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
+				JOptionPane.showMessageDialog(null, "Error uploading image");
 			}
-			if(col == "Red")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-			if(col == "Blue")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-		}
-		else if (nm == "elf")
-		{
-			if( col == "Natural")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_" + "n_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-			if(col == "Red")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-			if(col == "Blue")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-		}
-		else if (nm == "grf")
-		{
-			if( col == "Natural")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_" + "n_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-			if(col == "Red")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-			if(col == "Blue")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-		}
-		else if (nm == "trt")
-		{
-			if( col == "Natural")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_n_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-			if(col == "Red")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_r_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-			if(col == "Blue")
-			{
-				try {
-					this.img1 = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + "_b_1.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Animal drawed");
-			}
-		}
-		else
-		{
+		}catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Error uploading image");
+			e.printStackTrace();
 		}
 	}
 	
@@ -388,8 +268,19 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 	
 	public void run()
 	{
-		while(!this.threadSuspended)
+		while(flag = true)
 		{
+			while(threadSuspended)
+			{
+				try {
+				this.setWait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+			
+			System.out.print("Animal: " + getThread().getState());
 			xcor = getXLocation() + horSpeed * x_dir;
 			ycor = getYLocation() + verSpeed * y_dir;
 			this.coordChanged = true;
@@ -413,19 +304,151 @@ public abstract class Animal extends Mobile implements IEdible, IDrawable, IAnim
 				y_dir = 1;
 				ycor = getYLocation() + verSpeed * y_dir;
 			}
-			Point point1 = new Point(xcor,ycor);
-			this.setLocation(point1);
+//			if (xcor >= getPan().getWidth() || xcor <= 0) {
+//				System.out.println("Test if 1: location:" + getXLocation() + " " + getYLocation());
+//				if (xcor == 0) xcor = 1;
+//				if (x_dir == 1) x_dir = -1;
+//				else x_dir = 1;
+//			}
+//			if (ycor >= getPan().getHeight() || ycor <= 0) {
+//				System.out.println("Test if 2: location:" + getXLocation() + " " + getYLocation());
+//				if (ycor == 0) ycor = 1;
+//				if (y_dir == 1) y_dir = -1;
+//				else y_dir = 1;
+//			}
+			Point p = new Point(xcor,ycor);
+			super.setLocation(p);
+			
+			//System.out.print(getXLocation() + getYLocation());
+
+//			this.setLocation(point1);
 			try
 			{
 				Thread.sleep(100);
 			}catch(InterruptedException e)
 			{
-				throw new RuntimeException(e);
+//				throw new RuntimeException(e);
 			}
-			this.pan.repaint();
+			if(pan.getMeat() != null && this.diet.canEat(pan.getMeat().getFoodtype())  )
+			{
+				if(x_dir == 1 && getXLocation() > 400)
+				{
+					x_dir = -1;
+				}
+				if(x_dir == -1 && getXLocation() < 400)
+				{
+					x_dir = 1;
+				}
+				if(y_dir == 1 && getYLocation() > 300)
+				{
+					y_dir = -1;
+				}
+				if(y_dir == -1 && getYLocation() < 300)
+				{
+					y_dir = 1;
+				}
+				if( 400 - verSpeed < getXLocation() && getXLocation() < 400 + verSpeed && getXLocation() != 400)
+				{
+					Point po = new Point(400, getYLocation());
+					setLocation(po);
+				}
+				if( 300 - horSpeed < getYLocation() && getYLocation() < 300 + horSpeed && getYLocation() != 300)
+				{
+					Point po = new Point(getXLocation(),300);
+					setLocation(po);
+				}
+					
+				if(getXLocation() == 400 && getYLocation() == 300)
+				{
+					this.eat(this.pan.getMeat());
+					this.pan.setMeat(null);
+					this.pan.repaint();
+				}
+			}
+				if(pan.getPlant()!= null && this.diet.canEat(pan.getPlant().getFoodtype()))
+				{
+						if(x_dir == 1 && getXLocation() > 400)
+						{
+							x_dir = -1;
+						}
+						if(x_dir == -1 && getXLocation() < 400)
+						{
+							x_dir = 1;
+						}
+						if(y_dir == 1 && getYLocation() > 300)
+						{
+							y_dir = -1;
+						}
+						if(y_dir == -1 && getYLocation() < 300)
+						{
+							y_dir = 1;
+						}
+						if( 400 - verSpeed < getXLocation() && getXLocation() < 400 + verSpeed && getXLocation() != 400)
+						{
+							Point po = new Point(400, getYLocation());
+							setLocation(po);
+						}
+						if( 300 - horSpeed < getYLocation() && getYLocation() < 300 + horSpeed && getYLocation() != 300)
+						{
+							Point po = new Point(getXLocation(),300);
+							setLocation(po);
+						}
+							
+						if(getXLocation() == 400 && getYLocation() == 300)
+						{
+							this.eat(this.pan.getPlant());
+							this.pan.setPlant(null);
+							this.pan.repaint();
+						}
+						{
+					
+				}
+					
+			}
+			
+//			SwingUtilities.invokeLater(new Runnable() {
+//				public void run() {
+//			this.pan.managZoo();
+//			this.pan.managZoo();
+					this.pan.repaint();
+					
+//				}
+//			});
+
 		}
+		
 	}
 	
+	public void setPan(ZooPanel pan)
+	{
+		this.pan = pan;
+	}
+	
+	public Thread getThread()
+	{
+		return this.thread;
+	}
+	public BufferedImage getBufferedPic1()
+	{
+		return this.img1;
+	}
+	
+	public BufferedImage getBufferedPic2()
+	{
+		return this.img2;
+	}
+	
+	public void setBufferdPic()
+	{
+		try
+		{
+			img1 = ImageIO.read(new File(PICTURE_PATH));
+		}
+		catch(IOException e)
+		{
+			System.out.println("Cant load image");
+		}
+	}
 
 	
 	

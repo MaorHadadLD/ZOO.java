@@ -12,13 +12,14 @@ import java.awt.*;
 public class Lettuce extends Plant {
 	
 	public Lettuce(ZooPanel zooP) {
-		super();
+		super(zooP);
 		MessageUtility.logConstractor("Lettuce", "Lettuce");
-	}
-
-	@Override
-	public void loadmages(String nm) {
-		// TODO Auto-generated method stub
 		
 	}
+
+//	@Override
+//	public void loadmages(String nm) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

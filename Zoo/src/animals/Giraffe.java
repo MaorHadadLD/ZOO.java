@@ -2,6 +2,7 @@ package animals;
 import diet.Herbivore;
 import diet.IDiet;
 import food.*;
+import graphics.ZooPanel;
 import mobility.Point;
 import utilities.MessageUtility;
 import java.util.Random;
@@ -30,9 +31,9 @@ public class Giraffe extends Chew{
 		MessageUtility.logConstractor("Giraffe", name);
 	}
 	
-	public Giraffe(int size,String color,int hoerSpeed,int verSpeed)
+	public Giraffe(int size,String color,int hoerSpeed,int verSpeed, ZooPanel zoo)
 	{
-		super(startLocation,size,color,hoerSpeed,verSpeed);
+		super(startLocation,size,color,hoerSpeed,verSpeed, zoo);
 		super.setDiet(giraffeDiet);
 		super.setWeight(size * 2.2);
 	}
@@ -85,22 +86,22 @@ public class Giraffe extends Chew{
 		return "[Giraffe]:" + this.getName();
 	}
 
-	@Override
-	public boolean setLocation(Point newLocation) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 //	@Override
-//	public void loadmages(String nm) {
+//	public boolean setLocation(Point newLocation) {
 //		// TODO Auto-generated method stub
-//		
+//		return true;
 //	}
-
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
+//
+////	@Override
+////	public void loadmages(String nm) {
+////		// TODO Auto-generated method stub
+////		
+////	}
+//
+//	@Override
+//	public String getColor() {
+//		// TODO Auto-generated method stub
+//		return null;
 	}
 
 }

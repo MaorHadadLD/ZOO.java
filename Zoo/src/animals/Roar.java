@@ -1,7 +1,7 @@
 package animals;
 import javax.swing.JTextField;
 
-
+import graphics.ZooPanel;
 import mobility.Point;
 
 public abstract class Roar extends Animal{
@@ -11,12 +11,13 @@ public abstract class Roar extends Animal{
 		super(name,location);
 	}
 	
-    public Roar(Point startLocation, int size, String color, int hoerSpeed, int verSpeed) {
+    public Roar(Point startLocation, int size, String color, int hoerSpeed, int verSpeed, ZooPanel zoo) {
 		
-		super(startLocation,size,color,hoerSpeed,verSpeed);
+		super(startLocation,size,color,hoerSpeed,verSpeed, zoo);
 	}
 	
 	public abstract void roar();
+	
 	
 	public void makeSound()
 	{

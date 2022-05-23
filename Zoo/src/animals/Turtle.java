@@ -2,6 +2,7 @@ package animals;
 import diet.Herbivore;
 import diet.IDiet;
 import food.*;
+import graphics.ZooPanel;
 import mobility.Point;
 import java.util.Random;
 import utilities.MessageUtility; 
@@ -30,9 +31,9 @@ public class Turtle extends Chew{
 		MessageUtility.logConstractor("Turtle", name);
 	}
 	
-	public Turtle(int size,String color,int hoerSpeed,int verSpeed)
+	public Turtle(int size,String color,int hoerSpeed,int verSpeed, ZooPanel zoo)
 	{
-		super(startLocation,size,color,hoerSpeed,verSpeed);
+		super(startLocation,size,color,hoerSpeed,verSpeed, zoo);
 		super.setDiet(turtleDite);
 		super.setWeight(size * 0.5);
 	}
@@ -84,22 +85,22 @@ public class Turtle extends Chew{
 		return "[Turtle]:" + this.getName();
 	}
 
-	@Override
-	public boolean setLocation(Point newLocation) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-//	public void loadmages(String nm) {
+//	@Override
+//	public boolean setLocation(Point newLocation) {
 //		// TODO Auto-generated method stub
-//		
+//		return true;
 //	}
-
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//
+//	@Override
+////	public void loadmages(String nm) {
+////		// TODO Auto-generated method stub
+////		
+////	}
+//
+//	@Override
+//	public String getColor() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

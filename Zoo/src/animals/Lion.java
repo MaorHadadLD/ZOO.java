@@ -3,7 +3,7 @@ import mobility.Point;
 import diet.Carnivore;
 import diet.IDiet;
 import food.*;
-import graphics.Graphics;
+import graphics.*;
 
 import java.awt.Graphics2D;
 import java.util.Random;
@@ -35,9 +35,9 @@ public class Lion extends Roar{
 		MessageUtility.logConstractor("Lion", name);
 	}
 	
-	public Lion(int size, String color, int horSpeed, int verSpeed)
+	public Lion(int size, String color, int horSpeed, int verSpeed, ZooPanel zoo)
 	{
-		super(stratLOcation,size,color,horSpeed,verSpeed);
+		super(stratLOcation,size,color,horSpeed,verSpeed, zoo);
 		super.setDiet(lionDiet);
 		super.setWeight(size * 0.8);
 	}
@@ -89,7 +89,7 @@ public class Lion extends Roar{
 		return "[Lion]:" + this.getName();
 	}
 
-	@Override
+//	@Override
 //	public void loadmages(String nm) {
 //		// TODO Auto-generated method stub
 //		
@@ -101,16 +101,16 @@ public class Lion extends Roar{
 //		
 //	}
 
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public String getColor() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	@Override
-	public boolean setLocation(Point newLocation) {
-		
-		return true;
-	}
+//	@Override
+//	public boolean setLocation(Point newLocation) {
+//		
+//		return true;
+//	}
 
 }

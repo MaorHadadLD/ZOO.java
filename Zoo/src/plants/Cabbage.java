@@ -12,14 +12,14 @@ public class Cabbage extends Plant {
 	
 	public Cabbage(ZooPanel zooP) 
 	{
-		super();
+		super(zooP);
 		MessageUtility.logConstractor("Cabbage", "Cabbage");
 	}
 
-	@Override
-	public void loadmages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void loadmages(String nm) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 }

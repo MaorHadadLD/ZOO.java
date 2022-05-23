@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -49,7 +50,7 @@ public class ZooFrame extends JFrame implements ActionListener{
 	private JButton wakeUp;
 	private JPanel panel;
 	private BufferedImage pic1, pic2;
-	private Thread controller;
+	protected ArrayList<Animal> animalist  = new ArrayList<Animal>();
 	moveAnimalDialog ma;
 	AddAnimalDialog ad;
 	
@@ -63,7 +64,7 @@ public class ZooFrame extends JFrame implements ActionListener{
 		this.setSize(900, 600); //sets the x-dimension, and y-dimension of frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit out of application
 		this.setLocationRelativeTo(null);
-		zooPanel = new ZooPanel();
+		zooPanel = new ZooPanel(animalist);
 		label = new JLabel();
 		l2 = new JLabel();
 		panel = new JPanel();
@@ -120,7 +121,7 @@ public class ZooFrame extends JFrame implements ActionListener{
 		//this.setLayout(new BorderLayout());
 		this.setVisible(true);
 		addAnimal.setFocusable(false);
-		moveAnimal.setFocusable(false);
+//		moveAnimal.setFocusable(false);
 		clear.setFocusable(false);
 		food.setFocusable(false);
 		info.setFocusable(false);
@@ -146,28 +147,24 @@ public class ZooFrame extends JFrame implements ActionListener{
 		
 		if(e.getSource() == image)
 		{
-//			 try { pic2 = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
-//			 catch (IOException ef) { System.out.println("Cannot load image"); }
-   	        label=new JLabel(new ImageIcon("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg"));
-	    	this.add(label);
+////			 try { pic2 = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
+////			 catch (IOException ef) { System.out.println("Cannot load image"); }
+//   	        label=new JLabel(new ImageIcon("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg"));
+//	    	this.add(label);
+			zooPanel.setBackG(0);
+			zooPanel.setVisible(true);
 		}
 		
-		//}
-		//setLayout(new FlowLayout());
-		 //label = new JLabel();
-		 //add(label);
-		 //setSize(900, 600);
-		 
 		if(e.getSource() == green)
 		{
-			this.remove(label);
-			this.getContentPane().setBackground(Color.green);
+			zooPanel.setBackG(1);
+			zooPanel.setVisible(true);
 		}
 		
 		if(e.getSource() == none)
 		{
-			this.remove(label);
-			this.getContentPane().setBackground(null);
+			zooPanel.setBackG(2);
+			zooPanel.setVisible(true);
 		}
 		
 		if(e.getSource() == help1)
@@ -201,7 +198,7 @@ public class ZooFrame extends JFrame implements ActionListener{
 			}
 			else
 			{
-				ad = new AddAnimalDialog(zooPanel);
+				ad = new AddAnimalDialog(zooPanel,animalist);
 			}
 		}
 //		if(e.getSource() == moveAnimal)
@@ -212,12 +209,20 @@ public class ZooFrame extends JFrame implements ActionListener{
 		{
 			for(int i = 0; i < zooPanel.getArraysize(); i++)
 			{
-				
+				zooPanel.animalist.get(i).setSuspended();
 			}
 		}
 		if(e.getSource() == wakeUp)
 		{
-			
+			for(int i = 0; i < zooPanel.getArraysize(); i++)
+			{
+				zooPanel.animalist.get(i).setResumed();
+				try {
+					zooPanel.animalist.get(i).setNotify();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}			}
 		}
 		if(e.getSource()==clear)
 		{
@@ -233,11 +238,11 @@ public class ZooFrame extends JFrame implements ActionListener{
 			fooda.add(lf);
 			ImageIcon icon2 = new ImageIcon("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//helppic.jpeg");
 			lf.setIcon(icon2);
-			JButton buttonm = new JButton("Meat");
-			buttonm.setFocusable(false);
-			buttonm.setBounds(240,200,100,20);
-			lf.add(buttonm);
-			buttonm.addActionListener(new ActionListener(){
+			JButton meat = new JButton("Meat");
+			meat.setFocusable(false);
+			meat.setBounds(240,200,100,20);
+			lf.add(meat);
+			meat.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e)
 				{
 					Meat meat = new Meat(zooPanel);
@@ -249,27 +254,27 @@ public class ZooFrame extends JFrame implements ActionListener{
 					fooda.dispose();
 				}
 				});
-			JButton buttonc = new JButton("Cabbage");
-			buttonc.setFocusable(false);
-			buttonc.setBounds(130,200,100,20);
-			lf.add(buttonc);
-			buttonc.addActionListener(new ActionListener(){
+			JButton cabbage = new JButton("Cabbage");
+			cabbage.setFocusable(false);
+			cabbage.setBounds(130,200,100,20);
+			lf.add(cabbage);
+			cabbage.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e)
 				{
 					Cabbage cabbage = new Cabbage(zooPanel);
 					zooPanel.setPlant(cabbage);
-					cabbage.loadmages("cabbage");;
+					cabbage.loadmages("cabbage");
 					zooPanel.setMeat(null);
 					repaint();
 					zooPanel.managZoo();
 					fooda.dispose();
 				}
 				});
-			JButton buttonl = new JButton("Lettuce");
-			buttonl.setFocusable(false);
-			buttonl.setBounds(20,200,100,20);
-			lf.add(buttonl);
-			buttonl.addActionListener(new ActionListener(){
+			JButton Lettuce = new JButton("Lettuce");
+			Lettuce.setFocusable(false);
+			Lettuce.setBounds(20,200,100,20);
+			lf.add(Lettuce);
+			Lettuce.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e)
 				{
 					Lettuce lettuce = new Lettuce(zooPanel);

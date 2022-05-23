@@ -16,12 +16,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import FoodMeat.Meat;
 import animals.Animal;
 import plants.Plant;
 
-public class ZooPanel extends JPanel implements ActionListener{
+public class ZooPanel extends JPanel implements ActionListener, Runnable
+{
 	
 	private JButton addAnimal;
 	private JButton moveAnimal;
@@ -38,16 +40,35 @@ public class ZooPanel extends JPanel implements ActionListener{
 	private Plant planet = null;
 	private Meat meat = null;
 	private boolean background = false;
+	private Thread controller;
 	//static ArrayList<Animal> animalList = new ArrayList<Animal>();
 	
-	public ZooPanel()
+	public ZooPanel(ArrayList<Animal> animalist)
 	{
+		this.animalist = animalist;
 		this.setBackground(null);
 		this.setVisible(true);
 		try{ img = ImageIO.read(new File("C://Users//maorh//git//ZOO.java//Zoo//src//graphics//savanna.jpg")); }
    	 	catch (IOException ie) { System.out.println("Cannot load image"); }
 	}
 	
+	public void run()
+	{
+		System.out.println(animalist.get(animalist.size()-1).toString());
+		animalist.get(animalist.size()-1).getThread().start();
+//		animalist.get(animalist.size()-1).getPan().repaint();
+	}
+	
+	public void setController(Thread thread)
+	{
+		this.controller = thread;
+	}
+	
+	public Thread getController()
+	{
+		return this.controller;
+	}
+
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
@@ -56,7 +77,15 @@ public class ZooPanel extends JPanel implements ActionListener{
 		 {
 		   g.drawImage(img,0,0,getWidth(),getHeight(), this);
 		 }
-		 background = false;
+//		 background = false;
+		 if(planet != null)
+		 {
+			 planet.drawObject(g);
+		 }
+		 if(meat != null)
+		 {
+			 meat.drawObject(g);
+		 }
 		 if(this.arraySize > 0)
 		 {
 			 for(int i = 0; i < this.arraySize; i++)
@@ -64,14 +93,7 @@ public class ZooPanel extends JPanel implements ActionListener{
 			 animalist.get(i).drawObject(g);
 			 }
 		 }
-		 else if(planet != null)
-		 {
-			 planet.drawObject(g);
-		 }
-		 else if(meat != null)
-		 {
-			 meat.drawObject(g);
-		 }
+		 
 		 
 		}
 	
@@ -126,9 +148,33 @@ public class ZooPanel extends JPanel implements ActionListener{
 		
 	}
 	
+	public void setBackG(int num)
+	{
+		if(num == 0)
+		{
+			setBackground(null);
+			background = true;
+			this.repaint();
+		}
+		else if(num == 1)
+		{
+			this.setBackground(null);
+			this.setBackground(Color.GREEN);
+		}
+		else if(num == 2)
+		{
+			this.setBackground(null);
+		}
+	}
+	
 	public void setMeat(Meat meat)
 	{
 		this.meat = meat;
+	}
+	
+	public Meat getMeat()
+	{
+		return this.meat;
 	}
 	
 	public  void setListofanimals(String name) 
@@ -140,6 +186,11 @@ public class ZooPanel extends JPanel implements ActionListener{
 	public void setPlant(Plant plant)
 	{
 		this.planet = plant;
+	}
+	
+	public Plant getPlant()
+	{
+		return this.planet;
 	}
 	
 	public ArrayList<String> getListOfAnimal()
@@ -174,11 +225,17 @@ public class ZooPanel extends JPanel implements ActionListener{
 		return false;
 	}
 	
-	public void managZoo()
+	public synchronized void managZoo()
 	{
 		if(isChange())
 		{
-			repaint();
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					repaint();
+				}
+			});
+
+			
 		}
 		else if(this.getArraysize() > 0)
 		{
@@ -191,7 +248,11 @@ public class ZooPanel extends JPanel implements ActionListener{
 					{
 						this.setArraySize(this.getArraysize() - 1);
 						animalist.remove(j);
-						repaint();
+						SwingUtilities.invokeLater(new Runnable() {
+							public void run() {
+								repaint();
+							}
+						});
 					}
 				}
 			}
@@ -204,7 +265,11 @@ public class ZooPanel extends JPanel implements ActionListener{
 				if(animalist.get(k).distanceCheck(distance) && animalist.get(k).eat(this.planet))
 				{
 					planet = null;
-					repaint();
+					SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							repaint();
+						}
+					});
 				}
 			}
 		}
@@ -217,7 +282,11 @@ public class ZooPanel extends JPanel implements ActionListener{
 				if(animalist.get(h).distanceCheck(distance) && animalist.get(h).eat(this.meat))
 				{
 					meat = null;
-					repaint();
+					SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							repaint();
+						}
+					});
 				}
 			}
 		}

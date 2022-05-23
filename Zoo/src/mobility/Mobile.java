@@ -9,10 +9,11 @@ public abstract class Mobile implements Ilocatable{
 	
 	public Mobile(Point p)
 	{
-		if(setLocation(p))
-		{
+//		if(setLocation(p))
+//		{
 			this.location= new Point(p);
-		}
+//			System.out.println("Testmobile");
+//		}
 		this.totalDistance = 0;
 	}
 	
@@ -33,6 +34,7 @@ public abstract class Mobile implements Ilocatable{
 	
 	public boolean setLocation(Point pointA)
 	{
+		this.location = pointA;
 		return true;
 	}
 	
@@ -51,15 +53,17 @@ public abstract class Mobile implements Ilocatable{
 		return this.totalDistance;
 	}
 	
-	public int getXLocation()
+	public synchronized int getXLocation()
 	{
 		return location.getx();
 	}
 	
-	public int getYLocation()
+	public synchronized int getYLocation()
 	{
 		return location.gety();
 	}
+	
+	
 	
 
 }

@@ -1,7 +1,9 @@
 package animals;
 import diet.Herbivore;
+
 import diet.IDiet;
 import food.*;
+import graphics.ZooPanel;
 import mobility.Point;
 import utilities.MessageUtility;
 
@@ -31,9 +33,9 @@ public class Elephant extends Chew{
 		
 	}
 	
-	public Elephant(int size,String color,int hoerSpeed,int verSpeed)
+	public Elephant(int size,String color,int hoerSpeed,int verSpeed, ZooPanel zoo)
 	{
-		super(startLocation,size,color,hoerSpeed,verSpeed);
+		super(startLocation,size,color,hoerSpeed,verSpeed, zoo);
 		super.setDiet(elephantDiet);
 		super.setWeight(size * 10);
 	}
@@ -86,22 +88,22 @@ public class Elephant extends Chew{
 		return "[Elephant]:" + this.getName();
 	}
 
-	@Override
-	public boolean setLocation(Point newLocation) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public void loadmages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public boolean setLocation(Point newLocation) {
+//		// TODO Auto-generated method stub
+//		return true;
+//	}
+//
+//	@Override
+//	public void loadmages(String nm) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public String getColor() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

@@ -32,7 +32,7 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
 	
 
 	
-	public Plant() {
+	public Plant(ZooPanel zoop) {
 		Random rand = new Random();
 		int x = rand.nextInt(300);
 		int y = rand.nextInt(400);
@@ -40,6 +40,8 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
 		this.height = rand.nextInt(30);
 		this.weight = rand.nextInt(12);
 		MessageUtility.logConstractor("Plant", "Plant");
+		this.zooPa = zoop;
+		
 	}
 
 	/*
@@ -139,27 +141,25 @@ public abstract class Plant implements IEdible, Ilocatable, IDrawable {
 	
 	public void loadmages(String nm)
 	{
-		if(nm == "cabbage")
-		{
-			try {
+		try {
+			if(nm == "cabbage")
+			{
+			
                 this.image = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-		}
-		else if(nm == "lettuce")
-		{
-			try {
+			}
+            else if(nm == "lettuce")
+            {
+            	
                 this.image = ImageIO.read(new File(IDrawable.PICTURE_PATH + "\\" + nm + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-		}
+			} catch (IOException e) {
+            e.printStackTrace();
+			}
 	}
 	
 	public void drawObject(Graphics g)
 	{
-		g.drawImage(image, 400, 300, 30, 30, 0, 0, 0, 0, zooPa);
+		g.drawImage(image, 400, 300, 30, 30, zooPa);
 		zooPa.managZoo();
 	}
 	

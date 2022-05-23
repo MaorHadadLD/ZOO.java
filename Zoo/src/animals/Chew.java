@@ -1,4 +1,5 @@
 package animals;
+import graphics.ZooPanel;
 import mobility.Point;
 
 public abstract class Chew extends Animal{
@@ -8,9 +9,9 @@ public abstract class Chew extends Animal{
 		super(name,location);
 	}
 	
-	public Chew(Point startLocation, int size, String color, int hoerSpeed, int verSpeed) {
+	public Chew(Point startLocation, int size, String color, int hoerSpeed, int verSpeed, ZooPanel zoo) {
 		
-		super(startLocation,size,color,hoerSpeed,verSpeed);
+		super(startLocation,size,color,hoerSpeed,verSpeed, zoo);
 	}
 
 	public abstract void chew();

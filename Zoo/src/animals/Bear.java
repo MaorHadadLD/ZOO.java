@@ -1,7 +1,9 @@
 package animals;
 import diet.Omnivore;
+
 import diet.IDiet;
 import food.*;
+import graphics.ZooPanel;
 import mobility.Point;
 import utilities.MessageUtility;
 
@@ -29,9 +31,9 @@ public class Bear extends Roar{
 		MessageUtility.logConstractor("Bear", name);
 	}
 	
-	public Bear(int size,String color,int hoerSpeed,int verSpeed)
+	public Bear(int size,String color,int hoerSpeed,int verSpeed, ZooPanel zoo)
 	{
-		super(stratLocation,size,color,hoerSpeed,verSpeed);
+		super(stratLocation,size,color,hoerSpeed,verSpeed, zoo);
 		super.setDiet(bearDiet);
 		super.setWeight(size * 1.5);
 	}
@@ -96,23 +98,23 @@ public class Bear extends Roar{
 //		
 //	}
 
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setSuspended() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setResumed() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+//	@Override
+//	public String getColor() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void setSuspended() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void setResumed() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	
 
 }
